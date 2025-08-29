@@ -20,8 +20,15 @@ const App = () => {
 
   const handleAdd = () => {
     const newTitle = titolo.trim();
+
+    //controlliamo se si sta aggiungendo un tutolo vuoto 
+    if (!newTitle) {
+      alert("Inserisci un titolo prima di aggiungere!");
+      return;
+    }
     setArticles(oldArray => [...oldArray, newTitle]);
-    console.log(articles)
+    //azzerriamo titolo togliendo input dopo aver premito aggiungi
+    setTitolo("");
   }
 
   return (
