@@ -36,6 +36,6 @@ header img {
 }
 
 .list-group-item:hover {
-    scale: 1.005;
+    background-color: antiquewhite;
     cursor: pointer;
 }

@@ -17,7 +17,7 @@ const App = () => {
   const [articles, setArticles] = useState(articlesCagliariCalcio);
   const [titolo, setTitolo] = useState("");
 
-  // ***** F U N Z I N E A L C L I C K S U L B U T T O N *********
+  // ***** F U N Z I N E  A L  C L I C K  S U L B U T T O N  A G G I U N G I *******
   const handleAdd = () => {
     const newTitle = titolo.trim();
 
@@ -30,6 +30,16 @@ const App = () => {
     //azzerriamo titolo togliendo input dopo aver premito aggiungi
     setTitolo("");
   }
+  // ***** F U N Z I N E  A L  C L I C K  S U L B U T T O N  E L I M I N A *******
+
+  const deleteArticle = (index) => {
+    setArticles(prevArticles => {
+      const updated = [...prevArticles];
+      updated.splice(index, 1);
+      return updated;
+    });
+  };
+
 
   return (
     <>
@@ -39,12 +49,18 @@ const App = () => {
         {/*Lista A R T I C O L I  */}
         <div className="container">
           <ul className='list-group'>
-            {articles.map((article, i) => (
+            {articles.map((article, index) => (
               <li
-                key={i}
+                key={index}
                 className='list-group-item' >
                 <p>{article}</p>
-                <button className="btn btn-outline-danger btn-sm" type="button">
+
+                {/*tasto  E L I M I N A */}
+                <button
+                  className="btn btn-outline-danger btn-sm"
+                  type="button"
+                  onClick={() => deleteArticle(index)}
+                >
                   <i className="bi bi-trash">X</i>
                 </button>
               </li>
