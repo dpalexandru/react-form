@@ -1,9 +1,10 @@
 import React from 'react'
 import Header from './components/Header'
+import { useState } from 'react';
 
 // DATA 
 
-const articolesCagliariCalcio = [
+const articlesCagliariCalcio = [
   "Cagliari Calcio: la nuova stagione tra sogni e obiettivi in Serie A",
   "I giocatori simbolo del Cagliari: da Riva a oggi",
   "Cagliari Calcio e la passione dei tifosi sardi: un amore senza confini",
@@ -12,6 +13,17 @@ const articolesCagliariCalcio = [
 ];
 
 const App = () => {
+
+  const [articles, setArticles] = useState(articlesCagliariCalcio);
+  const [titolo, setTitolo] = useState("");
+
+
+  const handleAdd = () => {
+    const newTitle = titolo.trim();
+    setArticles(oldArray => [...oldArray, newTitle]);
+    console.log(articles)
+  }
+
   return (
     <>
       <Header />
@@ -20,8 +32,12 @@ const App = () => {
         {/*Lista A R T I C O L I  */}
         <div className="container">
           <ul className='list-group'>
-            {articolesCagliariCalcio.map((article) => (
-              <li className='list-group-item' >{article}</li>
+            {articles.map((article, i) => (
+              <li
+                key={i}
+                className='list-group-item' >
+                {article}
+              </li>
             ))}
           </ul>
 
@@ -30,17 +46,19 @@ const App = () => {
             <input
               type="text"
               className='form-control'
-              placeholder='Titolo Articolo' />
+              placeholder='Titolo Articolo'
+              value={titolo}
+              onChange={(e) => setTitolo(e.target.value)}
+            />
             <button
               className='btn btn-primary'
-              type='button'>
+              type='button'
+              onClick={handleAdd}
+            >
               Aggiungi
             </button>
           </div>
         </div>
-
-
-
       </main>
 
     </>
