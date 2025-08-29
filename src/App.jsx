@@ -17,7 +17,7 @@ const App = () => {
   const [articles, setArticles] = useState(articlesCagliariCalcio);
   const [titolo, setTitolo] = useState("");
 
-
+  // ***** F U N Z I N E A L C L I C K S U L B U T T O N *********
   const handleAdd = () => {
     const newTitle = titolo.trim();
 
@@ -43,7 +43,10 @@ const App = () => {
               <li
                 key={i}
                 className='list-group-item' >
-                {article}
+                <p>{article}</p>
+                <button className="btn btn-outline-danger btn-sm" type="button">
+                  <i className="bi bi-trash">X</i>
+                </button>
               </li>
             ))}
           </ul>

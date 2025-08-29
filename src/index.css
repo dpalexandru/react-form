@@ -26,6 +26,15 @@ header img {
     transition: transform 0.5s;
 }
 
+
+/* M A I N */
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .list-group-item:hover {
     scale: 1.005;
     cursor: pointer;
