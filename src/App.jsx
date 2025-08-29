@@ -16,15 +16,29 @@ const App = () => {
     <>
       <Header />
       <main>
+
+        {/*Lista A R T I C O L I  */}
         <div className="container">
           <ul className='list-group'>
             {articolesCagliariCalcio.map((article) => (
               <li className='list-group-item' >{article}</li>
             ))}
-
-
           </ul>
+
+          {/*Pulsante A G G I U N G I */}
+          <div className="input-group mt-4">
+            <input
+              type="text"
+              className='form-control'
+              placeholder='Titolo Articolo' />
+            <button
+              className='btn btn-primary'
+              type='button'>
+              Aggiungi
+            </button>
+          </div>
         </div>
+
 
 
       </main>
