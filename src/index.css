@@ -18,3 +18,14 @@ header img {
     height: 100px;
     width: 100px;
 }
+
+.list-group-item {
+    margin: 5px;
+    padding: 5;
+    transition: transform 0.5s;
+}
+
+.list-group-item:hover {
+    scale: 1.005;
+    cursor: pointer;
+}
