@@ -16,8 +16,11 @@ const App = () => {
 
   const [articles, setArticles] = useState(articlesCagliariCalcio);
   const [titolo, setTitolo] = useState("");
+  // use state per tasto modifica 
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editingText, setEditingText] = useState("");
 
-  // ***** F U N Z I N E  A L  C L I C K  S U L B U T T O N  A G G I U N G I *******
+  // ***** F U N Z I N E  A G G I U N G I *******
   const handleAdd = () => {
     const newTitle = titolo.trim();
 
@@ -30,7 +33,7 @@ const App = () => {
     //azzerriamo titolo togliendo input dopo aver premito aggiungi
     setTitolo("");
   }
-  // ***** F U N Z I N E  A L  C L I C K  S U L B U T T O N  E L I M I N A *******
+  // ***** F U N Z I N E   E L I M I N A *******
 
   const deleteArticle = (index) => {
     setArticles(prevArticles => {
@@ -39,6 +42,33 @@ const App = () => {
       return updated;
     });
   };
+
+  //* F U N Z I O N E M O DI F I C A */
+  const startEdit = (index) => {
+    setEditingIndex(index);
+    setEditingText(articles[index]);
+  }
+
+  //* F U N Z I O N E  S A L V A M O DI F I C A */
+  const saveEdit = () => {
+    const text = editingText.trim();
+    // controllo campo vuoto 
+    if (!text) {
+      alert("Il titolo non può essere vuoto.");
+      return;
+    }
+    setArticles(prev => prev.map((t, i) => (i === editingIndex ? text : t)));
+    setEditingIndex(null);
+    setEditingText("");
+
+  }
+  //* F U N Z I O N E  A N U L L A M O DI F I C A */
+  const stopEdit = () => {
+    setEditingIndex(null);
+    setEditingText("");
+  }
+
+
 
 
   return (
@@ -53,22 +83,67 @@ const App = () => {
               <li
                 key={index}
                 className='list-group-item' >
-                <p>{article}</p>
+                {/*COntrollo se se modifica è stato premuto */}
+                {editingIndex === index ? (
+                  <input
+                    type='text'
+                    className='form-control short'
+                    value={editingText}
+                    onChange={(e) => setEditingText(e.target.value)}
+                  />)
+                  : (
+                    <p>{article}</p>)
 
-                {/*tasto  E L I M I N A */}
-                <button
-                  className="btn btn-outline-danger btn-sm"
-                  type="button"
-                  onClick={() => deleteArticle(index)}
-                >
-                  <i className="bi bi-trash">X</i>
-                </button>
+                }
+
+
+
+                <div className="buttons">
+                  {/*tasto  M O D I F I C A  */}
+                  <button
+                    className={`btn ${editingIndex === index ? "d-none" : ""}`}
+                    type='button'
+                    onClick={() => startEdit(index)}
+
+                  >
+                    <img src="./edit-button-svgrepo-com.svg" alt="" />
+
+                  </button>
+                  {/*Tasto Salva M O D I F I C H E */}
+
+                  <button
+                    className={`btn ${editingIndex === index ? "" : "d-none"} `}
+                    type='button'
+                    onClick={saveEdit}
+                  >
+                    <img src="./ok-svgrepo-com.svg" alt="" />
+
+                  </button>
+                  <button
+                    className={`btn ${editingIndex === index ? "" : "d-none"} `}
+                    type='button'
+                    onClick={stopEdit}
+                  >
+                    <img src="./back-square-svgrepo-com (1).svg" alt="" />
+
+                  </button>
+
+
+                  {/*tasto  E L I M I N A */}
+                  <button
+                    className={`btn btn-outline-danger btn-sm ${editingIndex === index ? "d-none" : ""}`}
+                    type="button"
+                    onClick={() => deleteArticle(index)}
+                  >
+                    <i className="bi bi-trash">X</i>
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
 
           {/*Pulsante A G G I U N G I */}
-          <div className="input-group mt-4">
+          < div className="input-group mt-4" >
             <input
               type="text"
               className='form-control'
@@ -85,7 +160,7 @@ const App = () => {
             </button>
           </div>
         </div>
-      </main>
+      </main >
 
     </>
   )

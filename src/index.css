@@ -39,3 +39,16 @@ header img {
     background-color: antiquewhite;
     cursor: pointer;
 }
+
+main img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+main img:hover {
+    scale: 1.1;
+}
+
+.short {
+    width: 85%;
+}

@@ -15,3 +15,5 @@ BONUS
 Aggiungere la possibilità di cancellare ciascun articolo utilizzando un'icona.
 
 Buon lavoro!
+
+## C O N S E G N A 28/08/2025
